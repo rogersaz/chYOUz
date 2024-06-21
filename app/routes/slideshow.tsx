@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import './form-stylesheet.css';
 
 const supabaseUrl = 'https://xzlaojqvnvuvywshviso.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6bGFvanF2bnZ1dnl3c2h2aXNvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxODkyMjUzMCwiZXhwIjoyMDM0NDk4NTMwfQ.4a728R5ZXAx3S25lBN80WzKn476NQCOrHXnDKz_xeFM';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6bGFvanF2bnZ1dnl3c2h2aXNvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxODkyMjUzMCwiZXhwIjoyMDM0NDk4NTMwfQ.4a728R5ZXAx3S25lBN80WzKn476NQCOrHXnDKz_xeFM'; // Replace this with your actual Supabase anon key
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const Slideshow: React.FC = () => {
@@ -72,27 +73,24 @@ const Slideshow: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Slideshow Form</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
+    <div className="container">
+      <h1 className="heading">Slideshow Form</h1>
+      <form onSubmit={handleSubmit} className="form">
+        <label className="label">
           Name:
-          <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
+          <input type="text" name="name" value={formData.name} onChange={handleInputChange} required className="input" />
         </label>
-        <br />
-        <label>
+        <label className="label">
           Email Address:
-          <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
+          <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="input" />
         </label>
-        <br />
-        <label>
+        <label className="label">
           Short Song Keywords or Phrase:
-          <input type="text" name="keywords" value={formData.keywords} onChange={handleInputChange} required />
+          <input type="text" name="keywords" value={formData.keywords} onChange={handleInputChange} required className="input" />
         </label>
-        <br />
-        <label>
+        <label className="label">
           Music Genre:
-          <select name="genre" value={formData.genre} onChange={handleInputChange} required>
+          <select name="genre" value={formData.genre} onChange={handleInputChange} required className="select">
             <option value="">Select Genre</option>
             <option value="Bluegrass">Bluegrass</option>
             <option value="Country">Country</option>
@@ -114,10 +112,9 @@ const Slideshow: React.FC = () => {
             <option value="Skatecore">Skatecore</option>
           </select>
         </label>
-        <br />
-        <label>
+        <label className="label">
           Voice Type:
-          <select name="voiceType" value={formData.voiceType} onChange={handleInputChange} required>
+          <select name="voiceType" value={formData.voiceType} onChange={handleInputChange} required className="select">
             <option value="">Select Voice Type</option>
             <option value="A Cappella">A Cappella</option>
             <option value="Dispassionate">Dispassionate</option>
@@ -136,22 +133,19 @@ const Slideshow: React.FC = () => {
             <option value="Vocaloid">Vocaloid</option>
           </select>
         </label>
-        <br />
-        <label>
+        <label className="label">
           Singer:
-          <select name="singer" value={formData.singer} onChange={handleInputChange} required>
+          <select name="singer" value={formData.singer} onChange={handleInputChange} required className="select">
             <option value="">Select Singer</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
         </label>
-        <br />
-        <label>
+        <label className="label">
           Upload Photos (max 25):
-          <input type="file" name="photos" onChange={handleFileChange} multiple accept="image/*" />
+          <input type="file" name="photos" onChange={handleFileChange} multiple accept="image/*" className="input" />
         </label>
-        <br />
-        <button type="submit">Submit</button>
+        <button type="submit" className="button">Submit</button>
       </form>
     </div>
   );
