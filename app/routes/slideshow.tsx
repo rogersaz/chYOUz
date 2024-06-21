@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useActionData, Form, json, redirect } from "remix";
+import React, { useState } from 'react';
+import { View, Text, TextInput, Picker, Button, ScrollView } from 'react-native';
 import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = "https://xzlaojqvnvuvywshviso.supabase.co";
