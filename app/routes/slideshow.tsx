@@ -98,4 +98,4 @@ const ChyouzSlideshow: React.FC = () => {
         <div className="mb-4">
           <label className="block
 
-          }
+      
