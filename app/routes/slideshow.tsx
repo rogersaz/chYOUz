@@ -1,132 +1,146 @@
-import React from 'react';
-import { View, Text, TextInput, Picker, Button } from 'react-native';
-import * as Superbase from 'superbase';
-import * as ImagePicker from 'expo-image-picker';
-import * as Permissions from 'expo-permissions';
-import * as MailComposer from 'expo-mail-composer';
+import { useState } from "react";
+import { useActionData, Form, json, redirect } from "remix";
+import { createClient } from "@supabase/supabase-js";
 
-const optionsMusicGenre = [
-  'Bluegrass', 'Country', 'Folk', 'Popular', 'Pop', 'Dance Pop', 'Pop Rock', 'RnB', 'Rock', 'Classic Rock', 'Blues Rock',
-  'Glam Rock', 'Hardcore Punk', 'Indie', 'Industrial Rock', 'Punk', 'Rock', 'Skate Rock', 'Skatecore'
-];
+const supabaseUrl = "https://xzlaojqvnvuvywshviso.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6bGFvanF2bnZ1dnl3c2h2aXNvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTg5MjI1MzAsImV4cCI6MjAzNDQ5ODUzMH0.qsk6kRv8uKts0K6-3da02Kpmsee50KAhlHiWAGsms5U"; // replace with your Supabase anon key
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-const optionsVoiceType = [
-  'A Cappella', 'Dispassionate', 'Emotional', 'Ethereal', 'Gregorian chant', 'Hindustani', 'Lounge Singer',
-  'Melismatic', 'Monotone', 'Narration', 'Resonant', 'Spoken Word', 'Sultry', 'Torchy', 'Vocaloid'
-];
+export const action = async ({ request }) => {
+  const formData = await request.formData();
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const songKeywords = formData.get("songKeywords");
+  const musicGenre = formData.get("musicGenre");
+  const voiceType = formData.get("voiceType");
+  const singer = formData.get("singer");
+  const photos = formData.getAll("photos");
 
-const NewMarkPage = () => {
-  const [name, setName] = React.useState('');
-  const [songKeywords, setSongKeywords] = React.useState('');
-  const [musicGenre, setMusicGenre] = React.useState(optionsMusicGenre[0]);
-  const [voiceType, setVoiceType] = React.useState(optionsVoiceType[0]);
-  const [singerGender, setSingerGender] = React.useState('');
-  const [photos, setPhotos] = React.useState([]);
+  const { data, error } = await supabase.from("slideshows").insert([
+    {
+      name,
+      email,
+      song_keywords: songKeywords,
+      music_genre: musicGenre,
+      voice_type: voiceType,
+      singer,
+    },
+  ]);
 
-  const handleNameChange = (text) => {
-    setName(text);
-  };
+  if (error) {
+    return json({ error: error.message }, { status: 500 });
+  }
 
-  const handleSongKeywordsChange = (text) => {
-    setSongKeywords(text);
-  };
-
-  const handleMusicGenreChange = (itemValue) => {
-    setMusicGenre(itemValue);
-  };
-
-  const handleVoiceTypeChange = (itemValue) => {
-    setVoiceType(itemValue);
-  };
-
-  const handleSingerGenderChange = (gender) => {
-    setSingerGender(gender);
-  };
-
-  const handleUploadPhotos = async () => {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-
-    if (status === 'granted') {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-
-      if (!result.cancelled) {
-        setPhotos([...photos, result.uri]);
-      }
-    }
-  };
-
-  const handleSubmit = async () => {
-    // Upload data to Superbase database
-    const client = new Superbase.createClient('https://xzlaojqvnvuvywshviso.supabase.co', '4xXlwsl45DSu6eumUSXddudfFaTtwICHdrSGzIdCkFugMxn98CfomjHxnr+AuW+/bo30N6m2MNdi8tPeD5ETSQ==');
-    const { data, error } = await client.from('customers').insert([
-      { name, songKeywords, musicGenre, voiceType, singerGender, photos },
-    ]);
+  // Handle file uploads
+  for (let photo of photos) {
+    const { data, error } = await supabase.storage
+      .from("photos")
+      .upload(`public/${photo.name}`, photo);
 
     if (error) {
-      console.error('Error uploading data to Superbase:', error);
-    } else {
-      // Send email
-      const emailSubject = 'New Customer Details';
-      const emailBody = `Name: ${name}\nSong Keywords: ${songKeywords}\nMusic Genre: ${musicGenre}\nVoice Type: ${voiceType}\nSinger Gender: ${singerGender}\nPhotos: ${photos.join(', ')}`;
-
-      MailComposer.composeAsync({
-        recipients: ['markymarkaz@gmail.com'],
-        subject: emailSubject,
-        body: emailBody,
-      });
+      return json({ error: error.message }, { status: 500 });
     }
+  }
+
+  return redirect("/success");
+};
+
+export default function Slideshow() {
+  const actionData = useActionData();
+  const [fileCount, setFileCount] = useState(0);
+
+  const handleFileChange = (e) => {
+    setFileCount(e.target.files.length);
   };
 
   return (
-    <View>
-      <Text>Name:</Text>
-      <TextInput
-        value={name}
-        onChangeText={handleNameChange}
-      />
-      
-      <Text>Short Song Keywords:</Text>
-      <TextInput
-        value={songKeywords}
-        onChangeText={handleSongKeywordsChange}
-      />
-      
-      <Text>Music Genre:</Text>
-      <Picker
-        selectedValue={musicGenre}
-        onValueChange={handleMusicGenreChange}
-      >
-        {optionsMusicGenre.map((genre, index) => (
-          <Picker.Item key={index} label={genre} value={genre} />
-        ))}
-      </Picker>
-      
-      <Text>Voice Type:</Text>
-      <Picker
-        selectedValue={voiceType}
-        onValueChange={handleVoiceTypeChange}
-      >
-        {optionsVoiceType.map((type, index) => (
-          <Picker.Item key={index} label={type} value={type} />
-        ))}
-      </Picker>
-      
-      <Text>Male or Female singer:</Text>
-      <TextInput
-        value={singerGender}
-        onChangeText={handleSingerGenderChange}
-      />
-      
-      <Button title="Upload Photos" onPress={handleUploadPhotos} />
-      
-      <Button title="Submit" onPress={handleSubmit} />
-    </View>
+    <div>
+      <h1>Create a Slideshow</h1>
+      {actionData?.error && <p style={{ color: "red" }}>{actionData.error}</p>}
+      <Form method="post" encType="multipart/form-data">
+        <div>
+          <label>
+            Name:
+            <input type="text" name="name" required />
+          </label>
+        </div>
+        <div>
+          <label>
+            Email Address:
+            <input type="email" name="email" required />
+          </label>
+        </div>
+        <div>
+          <label>
+            Short Song Keywords or Phrase:
+            <input type="text" name="songKeywords" required />
+          </label>
+        </div>
+        <div>
+          <label>
+            Music Genre:
+            <select name="musicGenre" required>
+              <option value="Bluegrass">Bluegrass</option>
+              <option value="Country">Country</option>
+              <option value="Folk">Folk</option>
+              <option value="Popular">Popular</option>
+              <option value="Pop">Pop</option>
+              <option value="Dance Pop">Dance Pop</option>
+              <option value="Pop Rock">Pop Rock</option>
+              <option value="RnB">RnB</option>
+              <option value="Rock">Rock</option>
+              <option value="Classic Rock">Classic Rock</option>
+              <option value="Blues Rock">Blues Rock</option>
+              <option value="Glam Rock">Glam Rock</option>
+              <option value="Hardcore Punk">Hardcore Punk</option>
+              <option value="Indie">Indie</option>
+              <option value="Industrial Rock">Industrial Rock</option>
+              <option value="Punk">Punk</option>
+              <option value="Skate Rock">Skate Rock</option>
+              <option value="Skatecore">Skatecore</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>
+            Voice Type:
+            <select name="voiceType" required>
+              <option value="A Cappella">A Cappella</option>
+              <option value="Dispassionate">Dispassionate</option>
+              <option value="Emotional">Emotional</option>
+              <option value="Ethereal">Ethereal</option>
+              <option value="Gregorian chant">Gregorian chant</option>
+              <option value="Hindustani">Hindustani</option>
+              <option value="Lounge Singer">Lounge Singer</option>
+              <option value="Melismatic">Melismatic</option>
+              <option value="Monotone">Monotone</option>
+              <option value="Narration">Narration</option>
+              <option value="Resonant">Resonant</option>
+              <option value="Spoken Word">Spoken Word</option>
+              <option value="Sultry">Sultry</option>
+              <option value="Torchy">Torchy</option>
+              <option value="Vocaloid">Vocaloid</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>
+            Singer:
+            <select name="singer" required>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>
+            Upload Photos (25 max):
+            <input type="file" name="photos" multiple onChange={handleFileChange} accept="image/*" required />
+          </label>
+          <p>{fileCount} files selected</p>
+        </div>
+        <button type="submit">Submit</button>
+      </Form>
+    </div>
   );
-};
-
-export default NewMarkPage;
+}
