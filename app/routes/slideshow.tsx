@@ -1,9 +1,9 @@
 // slideshow.tsx
 import { Form, useActionData, useTransition } from "@remix-run/react";
 import { useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-const supabase = createClient(
+const supabase: SupabaseClient = createClient(
   "https://xzlaojqvnvuvywshviso.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6bGFvanF2bnZ1dnl3c2h2aXNvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTg5MjI1MzAsImV4cCI6MjAzNDQ5ODUzMH0.qsk6kRv8uKts0K6-3da02Kpmsee50KAhlHiWAGsms5U"
 );
@@ -36,12 +36,12 @@ export const action = async ({ request }: { request: Request }) => {
     // Save form data to Supabase
     const { error: dbError } = await supabase.from("slideshow_data").insert([
       {
-        name,
-        email,
-        songKeywords,
-        musicGenre,
-        voiceType,
-        singer,
+        name: name as string,
+        email: email as string,
+        songKeywords: songKeywords as string,
+        musicGenre: musicGenre as string,
+        voiceType: voiceType as string,
+        singer: singer as string,
       },
     ]);
 
@@ -84,22 +84,25 @@ export default function Slideshow() {
         </div>
         <div>
           <label htmlFor="musicGenre">Music Genre:</label>
-          <select id="musicGenre" name="musicGenre" required>
-            <option value="">Select a genre</option>
-            <option value="Bluegrass">Bluegrass</option>
-            <option value="Country">Country</option>
-            <option value="Folk">Folk</option>
-            <option value="Popular">Popular</option>
-            <option value="Pop">Pop</option>
-            <option value="Dance Pop">Dance Pop</option>
-            <option value="Pop Rock">Pop Rock</option>
-            <option value="RnB">RnB</option>
-            <option value="Rock">Rock</option>
-            <option value="Classic Rock">Classic Rock</option>
-            <option value="Blues Rock">Blues Rock</option>
-            <option value="Glam Rock">Glam Rock</option>
-            <option value="Hardcore Punk">Hardcore Punk</option>
-          </select>
+          <select id="musicGenre" name="musicGen
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
         </div>
         <div>
           <label htmlFor="voiceType">Voice Type:</label>
