@@ -16,39 +16,43 @@ export const action = async ({ request }: { request: Request }) => {
   const musicGenre = formData.get("musicGenre");
   const voiceType = formData.get("voiceType");
   const singer = formData.get("singer");
-  const photos = formData.getAll("photos");
+  const photos = formData.getAll("photos") as File[];
 
   // Upload photos to Supabase
-  const { error: photoUploadError } = await Promise.all(
-    photos.map(async (photo: FormDataEntryValue) => {
+  try {
+    const uploadPromises = photos.map(async (photo) => {
       const { data, error } = await supabase.storage
         .from("slideshow-photos")
-        .upload(`${name}-${photo.name}`, photo as Blob);
-      return error;
-    })
-  );
+        .upload(`${name}-${photo.name}`, photo);
 
-  if (photoUploadError) {
-    return { error: "Error uploading photos" };
+      if (error) {
+        throw error;
+      }
+      return data;
+    });
+
+    await Promise.all(uploadPromises);
+
+    // Save form data to Supabase
+    const { error: dbError } = await supabase.from("slideshow_data").insert([
+      {
+        name,
+        email,
+        songKeywords,
+        musicGenre,
+        voiceType,
+        singer,
+      },
+    ]);
+
+    if (dbError) {
+      return { error: "Error saving data to Supabase" };
+    }
+
+    return { success: true };
+  } catch (error) {
+    return { error: "Error uploading photos or saving data" };
   }
-
-  // Save form data to Supabase
-  const { error: dbError } = await supabase.from("slideshow_data").insert([
-    {
-      name,
-      email,
-      songKeywords,
-      musicGenre,
-      voiceType,
-      singer,
-    },
-  ]);
-
-  if (dbError) {
-    return { error: "Error saving data to Supabase" };
-  }
-
-  return { success: true };
 };
 
 export default function Slideshow() {
@@ -96,4 +100,33 @@ export default function Slideshow() {
             <option value="Glam Rock">Glam Rock</option>
             <option value="Hardcore Punk">Hardcore Punk</option>
           </select>
+        </div>
+        <div>
+          <label htmlFor="voiceType">Voice Type:</label>
+          <input type="text" id="voiceType" name="voiceType" required />
+        </div>
+        <div>
+          <label htmlFor="singer">Singer:</label>
+          <input type="text" id="singer" name="singer" required />
+        </div>
+        <div>
+          <label htmlFor="photos">Upload Photos:</label>
+          <input
+            type="file"
+            id="photos"
+            name="photos"
+            multiple
+            accept="image/*"
+            onChange={handlePhotoUpload}
+          />
+        </div>
+        <button type="submit" disabled={transition.state === "submitting"}>
+          {transition.state === "submitting" ? "Submitting..." : "Submit"}
+        </button>
       </Form>
+      {actionData?.error && <p style={{ color: "red" }}>{actionData.error}</p>}
+      {actionData?.success && <p style={{ color: "green" }}>Success!</p>}
+    </div>
+  );
+}
+
