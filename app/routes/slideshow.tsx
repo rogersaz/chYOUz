@@ -1,146 +1,120 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Picker, Button, ScrollView } from 'react-native';
-import { createClient } from "@supabase/supabase-js";
+import * as ImagePicker from 'expo-image-picker';
+import { supabase } from './supabaseClient';
 
-const supabaseUrl = "https://xzlaojqvnvuvywshviso.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6bGFvanF2bnZ1dnl3c2h2aXNvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTg5MjI1MzAsImV4cCI6MjAzNDQ5ODUzMH0.qsk6kRv8uKts0K6-3da02Kpmsee50KAhlHiWAGsms5U"; // replace with your Supabase anon key
-const supabase = createClient(supabaseUrl, supabaseKey);
+const SlideShow = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [songKeywords, setSongKeywords] = useState('');
+  const [musicGenre, setMusicGenre] = useState('');
+  const [voiceType, setVoiceType] = useState('');
+  const [singer, setSinger] = useState('');
+  const [photos, setPhotos] = useState([]);
 
-export const action = async ({ request }) => {
-  const formData = await request.formData();
-  const name = formData.get("name");
-  const email = formData.get("email");
-  const songKeywords = formData.get("songKeywords");
-  const musicGenre = formData.get("musicGenre");
-  const voiceType = formData.get("voiceType");
-  const singer = formData.get("singer");
-  const photos = formData.getAll("photos");
+  const musicGenreOptions = [
+    'Bluegrass',
+    'Country',
+    'Folk',
+    'Popular',
+    'Pop',
+    'Dance Pop',
+    'Pop Rock',
+    'RnB',
+    'Rock',
+    'Classic Rock',
+    'Blues Rock',
+    'Glam Rock',
+    'Hardcore Punk',
+    'Indie',
+    'Industrial Rock',
+    'Punk',
+    'Rock',
+    'Skate Rock',
+    'Skatecore',
+  ];
 
-  const { data, error } = await supabase.from("slideshows").insert([
-    {
-      name,
-      email,
-      song_keywords: songKeywords,
-      music_genre: musicGenre,
-      voice_type: voiceType,
-      singer,
-    },
-  ]);
+  const voiceTypeOptions = [
+    'A Cappella',
+    'Dispassionate',
+    'Emotional',
+    'Ethereal',
+    'Gregorian chant',
+    'Hindustani',
+    'Lounge Singer',
+    'Melismatic',
+    'Monotone',
+    'Narration',
+    'Resonant',
+    'Spoken Word',
+    'Sultry',
+    'Torchy',
+    'Vocaloid',
+  ];
 
-  if (error) {
-    return json({ error: error.message }, { status: 500 });
-  }
+  const singerOptions = ['Male', 'Female'];
 
-  // Handle file uploads
-  for (let photo of photos) {
-    const { data, error } = await supabase.storage
-      .from("photos")
-      .upload(`public/${photo.name}`, photo);
+  const pickImage = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-    if (error) {
-      return json({ error: error.message }, { status: 500 });
+    if (status !== 'granted') {
+      alert('Sorry, we need camera roll permissions to make this work!');
+      return;
     }
-  }
 
-  return redirect("/success");
-};
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsMultipleSelection: true,
+    });
 
-export default function Slideshow() {
-  const actionData = useActionData();
-  const [fileCount, setFileCount] = useState(0);
+    if (!result.canceled) {
+      setPhotos([...photos, ...result.assets]);
+    }
+  };
 
-  const handleFileChange = (e) => {
-    setFileCount(e.target.files.length);
+  const uploadData = async () => {
+    try {
+      const { data, error } = await supabase.from('slideshow').insert([
+        {
+          name,
+          email,
+          song_keywords: songKeywords,
+          music_genre: musicGenre,
+          voice_type: voiceType,
+          singer,
+          photos: photos.map((photo) => photo.uri),
+        },
+      ]);
+
+      if (error) {
+        throw error;
+      }
+
+      alert('Data uploaded successfully!');
+    } catch (error) {
+      alert('Error uploading data:', error.message);
+    }
   };
 
   return (
-    <div>
-      <h1>Create a Slideshow</h1>
-      {actionData?.error && <p style={{ color: "red" }}>{actionData.error}</p>}
-      <Form method="post" encType="multipart/form-data">
-        <div>
-          <label>
-            Name:
-            <input type="text" name="name" required />
-          </label>
-        </div>
-        <div>
-          <label>
-            Email Address:
-            <input type="email" name="email" required />
-          </label>
-        </div>
-        <div>
-          <label>
-            Short Song Keywords or Phrase:
-            <input type="text" name="songKeywords" required />
-          </label>
-        </div>
-        <div>
-          <label>
-            Music Genre:
-            <select name="musicGenre" required>
-              <option value="Bluegrass">Bluegrass</option>
-              <option value="Country">Country</option>
-              <option value="Folk">Folk</option>
-              <option value="Popular">Popular</option>
-              <option value="Pop">Pop</option>
-              <option value="Dance Pop">Dance Pop</option>
-              <option value="Pop Rock">Pop Rock</option>
-              <option value="RnB">RnB</option>
-              <option value="Rock">Rock</option>
-              <option value="Classic Rock">Classic Rock</option>
-              <option value="Blues Rock">Blues Rock</option>
-              <option value="Glam Rock">Glam Rock</option>
-              <option value="Hardcore Punk">Hardcore Punk</option>
-              <option value="Indie">Indie</option>
-              <option value="Industrial Rock">Industrial Rock</option>
-              <option value="Punk">Punk</option>
-              <option value="Skate Rock">Skate Rock</option>
-              <option value="Skatecore">Skatecore</option>
-            </select>
-          </label>
-        </div>
-        <div>
-          <label>
-            Voice Type:
-            <select name="voiceType" required>
-              <option value="A Cappella">A Cappella</option>
-              <option value="Dispassionate">Dispassionate</option>
-              <option value="Emotional">Emotional</option>
-              <option value="Ethereal">Ethereal</option>
-              <option value="Gregorian chant">Gregorian chant</option>
-              <option value="Hindustani">Hindustani</option>
-              <option value="Lounge Singer">Lounge Singer</option>
-              <option value="Melismatic">Melismatic</option>
-              <option value="Monotone">Monotone</option>
-              <option value="Narration">Narration</option>
-              <option value="Resonant">Resonant</option>
-              <option value="Spoken Word">Spoken Word</option>
-              <option value="Sultry">Sultry</option>
-              <option value="Torchy">Torchy</option>
-              <option value="Vocaloid">Vocaloid</option>
-            </select>
-          </label>
-        </div>
-        <div>
-          <label>
-            Singer:
-            <select name="singer" required>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-          </label>
-        </div>
-        <div>
-          <label>
-            Upload Photos (25 max):
-            <input type="file" name="photos" multiple onChange={handleFileChange} accept="image/*" required />
-          </label>
-          <p>{fileCount} files selected</p>
-        </div>
-        <button type="submit">Submit</button>
-      </Form>
-    </div>
-  );
-}
+    <ScrollView contentContainerStyle={{ padding: 20 }}>
+      <Text style={{ fontSize: 18, marginBottom: 10 }}>Name:</Text>
+      <TextInput
+        style={{ borderWidth: 1, borderColor: 'gray', padding: 10, marginBottom: 20 }}
+        value={name}
+        onChangeText={setName}
+        placeholder="Enter your name"
+      />
+
+      <Text style={{ fontSize: 18, marginBottom: 10 }}>Email Address:</Text>
+      <TextInput
+        style={{ borderWidth: 1, borderColor: 'gray', padding: 10, marginBottom: 20 }}
+        value={email}
+        onChangeText={setEmail}
+        placeholder="Enter your email address"
+        keyboardType="email-address"
+      />
+
+      <Text style={{ fontSize: 18, marginBottom: 10 }}>Short Song Keywords or Phrase:</Text>
+      <TextInput
+        style={{ borderWidth: 1, borderColor: '
