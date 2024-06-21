@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { Formik, Field, Form, FieldArray } from 'formik';
-import Yup from 'yup';
+import { Yup } from 'yup';
 import { createClient } from '@supabase/supabase-js';
 import { Box, Button, FormControl, Input, Select, VStack } from '@chakra-ui/react';
 
