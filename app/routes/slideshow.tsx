@@ -96,5 +96,4 @@ export default function Slideshow() {
             <option value="Glam Rock">Glam Rock</option>
             <option value="Hardcore Punk">Hardcore Punk</option>
           </select>
-          </div>
       </Form>
