@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useActionData, Form, json, redirect } from "remix";
+import { useState } from 'react';
+import { Form, usePendingFormSubmit } from '@remix-run/react';
 import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = "https://xzlaojqvnvuvywshviso.supabase.co";
