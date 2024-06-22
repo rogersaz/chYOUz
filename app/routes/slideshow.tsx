@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import '../styles/form-stylesheet.css';
-
+import '../styles/form-stylesheet.css'; // Proper CSS import
 
 const supabaseUrl = 'https://xzlaojqvnvuvywshviso.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6bGFvanF2bnZ1dnl3c2h2aXNvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxODkyMjUzMCwiZXhwIjoyMDM0NDk4NTMwfQ.4a728R5ZXAx3S25lBN80WzKn476NQCOrHXnDKz_xeFM'; // Replace this with your actual Supabase anon key
@@ -114,30 +113,9 @@ const Slideshow: React.FC = () => {
           </select>
         </label>
         <label className="label">
-          Voice Type:
-          <select name="voiceType" value={formData.voiceType} onChange={handleInputChange} required className="select">
-            <option value="">Select Voice Type</option>
-            <option value="A Cappella">A Cappella</option>
-            <option value="Dispassionate">Dispassionate</option>
-            <option value="Emotional">Emotional</option>
-            <option value="Ethereal">Ethereal</option>
-            <option value="Gregorian chant">Gregorian chant</option>
-            <option value="Hindustani">Hindustani</option>
-            <option value="Lounge Singer">Lounge Singer</option>
-            <option value="Melismatic">Melismatic</option>
-            <option value="Monotone">Monotone</option>
-            <option value="Narration">Narration</option>
-            <option value="Resonant">Resonant</option>
-            <option value="Spoken Word">Spoken Word</option>
-            <option value="Sultry">Sultry</option>
-            <option value="Torchy">Torchy</option>
-            <option value="Vocaloid">Vocaloid</option>
-          </select>
-        </label>
-        <label className="label">
           Singer:
           <select name="singer" value={formData.singer} onChange={handleInputChange} required className="select">
-            <option value="">Select Singer</option>
+            <option value="">Select Singer's Voice</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
@@ -153,4 +131,3 @@ const Slideshow: React.FC = () => {
 };
 
 export default Slideshow;
-
