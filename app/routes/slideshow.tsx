@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import 'styles/form-stylesheet.css';
+import '../styles/form-stylesheet.css';
 
 const supabaseUrl = 'https://xzlaojqvnvuvywshviso.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6bGFvanF2bnZ1dnl3c2h2aXNvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxODkyMjUzMCwiZXhwIjoyMDM0NDk4NTMwfQ.4a728R5ZXAx3S25lBN80WzKn476NQCOrHXnDKz_xeFM'; // Replace this with your actual Supabase anon key
