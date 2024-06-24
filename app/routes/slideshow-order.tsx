@@ -15,6 +15,24 @@ export default function SlideshowOrder() {
   const onSubmit = async (data) => {
     console.log('Submitting data:', data);
     try {
+      // Upload photos to Supabase storage
+      const photoUrls = [];
+      for (const photo of photos) {
+        const { data: uploadData, error: uploadError } = await supabase
+          .storage
+          .from('photos')
+          .upload(`public/${photo.name}`, photo);
+
+        if (uploadError) {
+          console.error('Upload error:', uploadError);
+          throw uploadError;
+        }
+
+        const url = `${supabaseUrl}/storage/v1/object/public/photos/public/${photo.name}`;
+        photoUrls.push(url);
+      }
+
+      // Insert form data and photo URLs into Supabase database
       const { data: supabaseData, error } = await supabase
         .from('orders')
         .insert([{ 
@@ -23,14 +41,14 @@ export default function SlideshowOrder() {
           keywords: data.keywords, 
           genre: data.genre, 
           voice: data.voice,
-          photos: photos.map(photo => photo.name) // Assuming you'll handle file uploads separately
+          photos: photoUrls
         }]);
 
       if (error) {
         console.error('Supabase error:', error);
         throw error;
       }
-      
+
       console.log('Supabase response:', supabaseData);
       alert('Order submitted successfully');
     } catch (error) {
@@ -140,3 +158,4 @@ export default function SlideshowOrder() {
     </div>
   );
 }
+
