@@ -11,13 +11,16 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export default function SlideshowOrder() {
   const { register, handleSubmit } = useForm();
   const [photos, setPhotos] = useState<File[]>([]);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
 
   const onSubmit = async (data) => {
     console.log('Submitting data:', data);
+    setIsUploading(true);
     try {
-      // Upload photos to Supabase storage
       const photoUrls = [];
-      for (const photo of photos) {
+      for (let i = 0; i < photos.length; i++) {
+        const photo = photos[i];
         const { data: uploadData, error: uploadError } = await supabase
           .storage
           .from('photos')
@@ -30,9 +33,11 @@ export default function SlideshowOrder() {
 
         const url = `${supabaseUrl}/storage/v1/object/public/photos/public/${photo.name}`;
         photoUrls.push(url);
+
+        // Update progress
+        setUploadProgress(((i + 1) / photos.length) * 100);
       }
 
-      // Insert form data and photo URLs into Supabase database
       const { data: supabaseData, error } = await supabase
         .from('orders')
         .insert([{ 
@@ -54,6 +59,9 @@ export default function SlideshowOrder() {
     } catch (error) {
       console.error('Error submitting order:', error);
       alert('Error submitting order');
+    } finally {
+      setIsUploading(false);
+      setUploadProgress(0);
     }
   };
 
@@ -146,10 +154,23 @@ export default function SlideshowOrder() {
           />
         </div>
 
+        {isUploading && (
+          <div className="mt-4">
+            <label className="block mb-2">Uploading Photos</label>
+            <div className="w-full bg-gray-200 rounded-full h-4">
+              <div
+                className="bg-blue-500 h-4 rounded-full"
+                style={{ width: `${uploadProgress}%` }}
+              ></div>
+            </div>
+          </div>
+        )}
+
         <div className="mt-6 text-center">
           <button 
             type="submit" 
             className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
+            disabled={isUploading}
           >
             Submit Order
           </button>
@@ -158,3 +179,4 @@ export default function SlideshowOrder() {
     </div>
   );
 }
+
