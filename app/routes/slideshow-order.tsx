@@ -5,101 +5,86 @@ const supabaseUrl = 'https://xzlaojqvnvuvywshviso.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6bGFvanF2bnZ1dnl3c2h2aXNvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxODkyMjUzMCwiZXhwIjoyMDM0NDk4NTMwfQ.4a728R5ZXAx3S25lBN80WzKn476NQCOrHXnDKz_xeFM'; // Replace this with your actual Supabase anon key
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+// app/routes/slideshow-order.tsx
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, TouchableOpacity, FlatList, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
-interface FormData {
-  customerName: string;
-  email: string;
-  keywords: string[];
-  songGenre: string[];
-  singerVoice: 'male' | 'female';
-  photos: File[];
-}
+const SlideshowOrder = () => {
+  const navigation = useNavigation();
+  const [selectedImages, setSelectedImages] = useState([]);
 
-const SlideshowOrder: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    customerName: '',
-    email: '',
-    keywords: [],
-    songGenre: [],
-    singerVoice: 'male',
-    photos: [],
-  });
+  useEffect(() => {
+    // Fetch and set the initial selected images
+    setSelectedImages([/* initial selected images */]);
+  }, []);
 
-  const handleInputChange = (
-    event: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value, type, files } = event.target;
-    let newValue: string | string[] | File[];
-
-    if (type === 'checkbox') {
-      newValue = Array.from(
-        event.target.selectedOptions,
-        (option) => option.value
-      );
-    } else if (type === 'file') {
-      newValue = Array.from(files || []);
+  const handleImageSelect = (image) => {
+    // Toggle the selection of the image
+    if (selectedImages.includes(image)) {
+      setSelectedImages(selectedImages.filter((img) => img !== image));
     } else {
-      newValue = value;
+      setSelectedImages([...selectedImages, image]);
     }
-
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: newValue,
-    }));
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    try {
-      const { error } = await supabase.from('slideshow_orders').insert(formData);
-
-      if (error) {
-        console.error('Error saving form data:', error);
-      } else {
-        console.log('Form data saved successfully');
-        setFormData({
-          customerName: '',
-          email: '',
-          keywords: [],
-          songGenre: [],
-          singerVoice: 'male',
-          photos: [],
-        });
-      }
-    } catch (error) {
-      console.error('Error saving form data:', error);
-    }
+  const handleSubmit = () => {
+    // Navigate to the next screen with the selected images
+    navigation.navigate('NextScreen', { selectedImages });
   };
 
   return (
-    <div className="flex justify-center mt-8">
-      <form onSubmit={handleSubmit} className="w-full max-w-md">
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="customerName" className="block font-medium mb-2">
-              Customer Name
-            </label>
-            <input
-              type="text"
-              id="customerName"
-              name="customerName"
-              value={formData.customerName}
-              onChange={handleInputChange}
-              className="border rounded-md py-2 px-3 w-full"
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="block font-medium mb-2">
-              Email Address
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              className="border rounded-md py-2 px-
+    <View style={styles.container}>
+      <FlatList
+        data={/* your image data */}
+        keyExtractor={(item) => item.id}
+        numColumns={3}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={[
+              styles.imageContainer,
+              selectedImages.includes(item) ? styles.selectedContainer : null,
+            ]}
+            onPress={() => handleImageSelect(item)}
+          >
+            {/* Render the image */}
+            <Text>{item.name}</Text>
+          </TouchableOpacity>
+        )}
+      />
+      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+        <Ionicons name="arrow-forward" size={24} color="white" />
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    paddingTop: 20,
+  },
+  imageContainer: {
+    width: '33.33%',
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'gray',
+  },
+  selectedContainer: {
+    backgroundColor: 'lightgray',
+  },
+  submitButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    backgroundColor: 'blue',
+    padding: 15,
+    borderRadius: 50,
+  },
+});
+
+export default SlideshowOrder;
