@@ -3,8 +3,9 @@ import { createClient } from "@supabase/supabase-js";
 import { useForm } from "react-hook-form";
 import 'tailwindcss/tailwind.css';
 
-const supabaseUrl = 'https://xzlaojqvnvuvywshviso.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6bGFvanF2bnZ1dnl3c2h2aXNvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxODkyMjUzMCwiZXhwIjoyMDM0NDk4NTMwfQ.4a728R5ZXAx3S25lBN80WzKn476NQCOrHXnDKz_xeFM'; // Replace with your actual Supabase key
+// Use environment variables
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function SlideshowOrder() {
@@ -73,7 +74,7 @@ export default function SlideshowOrder() {
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-lg shadow-md max-w-2xl w-full">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold">Order Your Slideshow<br>Personalized songs for your moments and memories.</br></h2>
-          <div className="w-36 h-36 bg-gray-200 flex items-center justify-center">
+          <div className="w-72 h-22 bg-gray-200 flex items-center justify-center">
             <img src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-logoSM.png?raw=true" alt="chYOUz Logo" className="w-72 h-22" /> {/* Replace with your logo path */}
           </div>
         </div>
@@ -113,7 +114,7 @@ export default function SlideshowOrder() {
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2 font-bold">Song Genre</label>
+          <label className="block mb-2 font-bold">Song Genre - You Can Choose More Than 1</label>
           <select 
             multiple 
             {...register("genre", { required: true })} 
@@ -153,7 +154,7 @@ export default function SlideshowOrder() {
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2 font-bold">Upload Photos (max 25MB)</label>
+          <label className="block mb-2 font-bold">Upload Photos (max 40MB)</label>
           <input 
             type="file" 
             multiple 
