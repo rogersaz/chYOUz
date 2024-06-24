@@ -2,14 +2,15 @@
   "exclude": [],
   "include": [
     "./index.ts",
-    "**/*.ts",
+    "plugins/**/*",
+    "support/**/*",
     "../node_modules/cypress",
     "../node_modules/@testing-library/cypress"
   ],
   "compilerOptions": {
     "baseUrl": ".",
     "noEmit": true,
-    "types": ["node"],
+    "types": ["node", "cypress", "@testing-library/cypress"],
     "esModuleInterop": true,
     "jsx": "react",
     "moduleResolution": "node",
