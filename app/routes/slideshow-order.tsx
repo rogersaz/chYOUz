@@ -13,8 +13,9 @@ export default function SlideshowOrder() {
   const [photos, setPhotos] = useState<File[]>([]);
 
   const onSubmit = async (data) => {
+    console.log('Submitting data:', data);
     try {
-      const { error } = await supabase
+      const { data: supabaseData, error } = await supabase
         .from('orders')
         .insert([{ 
           name: data.name, 
@@ -25,10 +26,15 @@ export default function SlideshowOrder() {
           photos: photos.map(photo => photo.name) // Assuming you'll handle file uploads separately
         }]);
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
+      
+      console.log('Supabase response:', supabaseData);
       alert('Order submitted successfully');
     } catch (error) {
-      console.error(error);
+      console.error('Error submitting order:', error);
       alert('Error submitting order');
     }
   };
