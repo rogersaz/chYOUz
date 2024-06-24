@@ -135,9 +135,11 @@ export default function SlideshowOrder() {
         <div className="mt-4">
           <label className="block mb-2">Singer Voice</label>
           <select 
-            {...register("voice", { required: true })} 
+            {...register("voice", { required: true, validate: value => value !== "select" })} 
             className="w-full px-3 py-2 border rounded-md"
+            defaultValue="select"
           >
+            <option value="select" disabled>Select Voice</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
