@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import 'tailwindcss/tailwind.css';
 
 // Use environment variables
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function SlideshowOrder() {
@@ -73,7 +73,9 @@ export default function SlideshowOrder() {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-lg shadow-md max-w-2xl w-full">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold">Order Your Slideshow<br>Personalized songs for your moments and memories.</br></h2>
+          <h2 className="text-2xl font-semibold">
+            Order Your Slideshow<br />Personalized songs for your moments and memories.
+          </h2>
           <div className="w-72 h-22 bg-gray-200 flex items-center justify-center">
             <img src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-logoSM.png?raw=true" alt="chYOUz Logo" className="w-72 h-22" /> {/* Replace with your logo path */}
           </div>
