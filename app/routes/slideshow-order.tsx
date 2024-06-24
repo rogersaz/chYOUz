@@ -1,11 +1,10 @@
-// slideshow-order.tsx
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useForm } from "react-hook-form";
 import 'tailwindcss/tailwind.css';
 
 const supabaseUrl = 'https://xzlaojqvnvuvywshviso.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6bGFvanF2bnZ1dnl3c2h2aXNvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxODkyMjUzMCwiZXhwIjoyMDM0NDk4NTMwfQ.4a728R5ZXAx3S25lBN80WzKn476NQCOrHXnDKz_xeFM';
+const supabaseKey = 'your-supabase-key'; // Replace with your actual Supabase key
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function SlideshowOrder() {
@@ -72,11 +71,16 @@ export default function SlideshowOrder() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-lg shadow-md max-w-2xl w-full">
-        <h2 className="text-2xl mb-6 font-semibold text-center">Order Your Slideshow</h2>
-        
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-semibold">Order Your Slideshow<br>Personalized songs for your moments and memories.</br></h2>
+          <div className="w-36 h-36 bg-gray-200 flex items-center justify-center">
+            <img src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-logoSM.png?raw=true" alt="chYOUz Logo" className="w-72 h-22" /> {/* Replace with your logo path */}
+          </div>
+        </div>
+
         <div className="grid grid-cols-2 gap-6">
           <div className="col-span-2 md:col-span-1">
-            <label className="block mb-2">Name</label>
+            <label className="block mb-2 font-bold">Name</label>
             <input 
               type="text" 
               {...register("name", { required: true })} 
@@ -85,10 +89,13 @@ export default function SlideshowOrder() {
             />
           </div>
           <div className="col-span-2 md:col-span-1">
-            <label className="block mb-2">Email</label>
+            <label className="block mb-2 font-bold">Email</label>
             <input 
               type="email" 
-              {...register("email", { required: true })} 
+              {...register("email", { 
+                required: true, 
+                pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ 
+              })} 
               className="w-full px-3 py-2 border rounded-md"
               placeholder="Enter your email" 
             />
@@ -96,7 +103,7 @@ export default function SlideshowOrder() {
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2">Keywords for Song</label>
+          <label className="block mb-2 font-bold">Keywords for Song</label>
           <input 
             type="text" 
             {...register("keywords", { required: true })} 
@@ -106,7 +113,7 @@ export default function SlideshowOrder() {
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2">Song Genre</label>
+          <label className="block mb-2 font-bold">Song Genre</label>
           <select 
             multiple 
             {...register("genre", { required: true })} 
@@ -133,7 +140,7 @@ export default function SlideshowOrder() {
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2">Singer Voice</label>
+          <label className="block mb-2 font-bold">Singer's Voice</label>
           <select 
             {...register("voice", { required: true, validate: value => value !== "select" })} 
             className="w-full px-3 py-2 border rounded-md"
@@ -146,7 +153,7 @@ export default function SlideshowOrder() {
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2">Upload Photos (max 25MB)</label>
+          <label className="block mb-2 font-bold">Upload Photos (max 25MB)</label>
           <input 
             type="file" 
             multiple 
@@ -158,7 +165,7 @@ export default function SlideshowOrder() {
 
         {isUploading && (
           <div className="mt-4">
-            <label className="block mb-2">Uploading Photos</label>
+            <label className="block mb-2 font-bold">Uploading Photos</label>
             <div className="w-full bg-gray-200 rounded-full h-4">
               <div
                 className="bg-blue-500 h-4 rounded-full"
@@ -181,4 +188,3 @@ export default function SlideshowOrder() {
     </div>
   );
 }
-
