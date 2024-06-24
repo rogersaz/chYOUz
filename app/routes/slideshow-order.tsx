@@ -3,9 +3,8 @@ import { createClient } from "@supabase/supabase-js";
 import { useForm } from "react-hook-form";
 import 'tailwindcss/tailwind.css';
 
-// Use environment variables
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
+const supabaseUrl = 'https://xzlaojqvnvuvywshviso.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6bGFvanF2bnZ1dnl3c2h2aXNvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxODkyMjUzMCwiZXhwIjoyMDM0NDk4NTMwfQ.4a728R5ZXAx3S25lBN80WzKn476NQCOrHXnDKz_xeFM';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default function SlideshowOrder() {
@@ -71,16 +70,14 @@ export default function SlideshowOrder() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-lg shadow-md max-w-2xl w-full">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold">
-            Order Your Slideshow<br />Personalized songs for your moments and memories.
-          </h2>
-          <div className="w-72 h-22 bg-gray-200 flex items-center justify-center">
-            <img src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-logoSM.png?raw=true" alt="chYOUz Logo" className="w-72 h-22" /> {/* Replace with your logo path */}
-          </div>
-        </div>
-
+      <form onSubmit={handleSubmit(onSubmit)} className="relative bg-white p-8 rounded-lg shadow-md max-w-2xl w-full">
+        <img 
+          src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-logo.png?raw=true" 
+          alt="Top Right Photo" 
+          className="absolute top-0 right-0 m-4 w-288 h-88"
+        />
+        <h2 className="text-2xl mb-6 font-semibold text-left">Order Your Slideshow<br />Personalized songs for<br />your moments and memories.</h2>
+        
         <div className="grid grid-cols-2 gap-6">
           <div className="col-span-2 md:col-span-1">
             <label className="block mb-2 font-bold">Name</label>
@@ -95,10 +92,7 @@ export default function SlideshowOrder() {
             <label className="block mb-2 font-bold">Email</label>
             <input 
               type="email" 
-              {...register("email", { 
-                required: true, 
-                pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ 
-              })} 
+              {...register("email", { required: true })} 
               className="w-full px-3 py-2 border rounded-md"
               placeholder="Enter your email" 
             />
@@ -116,7 +110,7 @@ export default function SlideshowOrder() {
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2 font-bold">Song Genre - You Can Choose More Than 1</label>
+          <label className="block mb-2 font-bold">Song Genre - You can select multiple options.</label>
           <select 
             multiple 
             {...register("genre", { required: true })} 
