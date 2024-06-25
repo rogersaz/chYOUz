@@ -18,7 +18,7 @@ export default function Index() {
             </div>
             <div className="lg:pb-18 relative px-4 pt-16 pb-8 sm:px-6 sm:pt-24 sm:pb-14 lg:px-8 lg:pt-32">
               <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl">
-                <span className="block uppercase text-orange-500 drop-shadow-md font-savoye">
+                <span className="block uppercase text-orange-500 drop-shadow-md font-Impact">
                   - chYOUz -
                 </span>
               </h1>
