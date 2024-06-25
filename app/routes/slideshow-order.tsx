@@ -78,7 +78,7 @@ export default function SlideshowOrder() {
             alt="chYOUz logo" 
             className="w-32 h-20 mr-2"
           />
-          <h2 className="text-2xl font-semibold text-left">
+          <h2 className="text-2xl font-semibold text-right">
             Order Your Slideshow.<br />Personalized songs for<br />your moments and memories.
           </h2>
         </div>
