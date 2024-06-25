@@ -8,10 +8,10 @@ export default function Index() {
       <div className="relative sm:pb-16 sm:pt-8">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
-            <div className="absolute inset-0">
+            <div className="absolute inset-0 flex justify-center">
               <img
-                className="h-full w-full object-cover"
-                src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-Background-notes.jpg?raw=true"
+                className="h-full w-full object-cover max-w-[770px]"
+                src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-Background-notes.jpeg?raw=true"
                 alt="chYOUz custom music for your custom slideshows"
               />
               <div className="absolute inset-0 bg-[color:rgba(139,92,246,0.5)] mix-blend-multiply" />
