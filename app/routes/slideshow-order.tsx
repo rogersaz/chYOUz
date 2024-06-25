@@ -1,4 +1,3 @@
-// slideshow-order.tsx
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useForm } from "react-hook-form";
@@ -72,13 +71,13 @@ export default function SlideshowOrder() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-lg shadow-md max-w-2xl w-full">
-        <div className="flex items-center mb-4">
+        <div className="flex flex-col items-center mb-4">
           <img 
             src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-logo-white.png?raw=true" 
             alt="chYOUz logo" 
-            className="w-32 h-20 mr-2"
+            className="w-32 h-20 mb-4"
           />
-          <h2 className="text-2xl font-semibold text-right">
+          <h2 className="text-2xl font-semibold text-center">
             Order Your Slideshow.<br />Personalized songs for your<br />moments and memories.
           </h2>
         </div>
@@ -190,4 +189,3 @@ export default function SlideshowOrder() {
     </div>
   );
 }
-
