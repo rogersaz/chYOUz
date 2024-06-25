@@ -75,7 +75,7 @@ export default function SlideshowOrder() {
           <img 
             src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-logo-white.png?raw=true" 
             alt="chYOUz logo" 
-            className="w-32 h-20 mb-4"
+            className="w-48 h-28 mb-4"
           />
           <h2 className="text-2xl font-semibold text-center">
             Order Your Slideshow.<br />Personalized songs for your moments & memories.
