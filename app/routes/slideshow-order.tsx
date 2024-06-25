@@ -176,7 +176,7 @@ export default function SlideshowOrder() {
           </div>
         )}
 
-        <div className="mt-6 text-center">
+        <div className="mt-6 text-center space-x-4">
           <button 
             type="submit" 
             className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
@@ -184,6 +184,12 @@ export default function SlideshowOrder() {
           >
             Submit Order
           </button>
+          <a 
+            href="https://main--reliable-tapioca-f669c0.netlify.app/" 
+            className="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 transition-colors duration-300"
+          >
+            Home
+          </a>
         </div>
       </form>
     </div>
