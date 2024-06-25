@@ -74,7 +74,7 @@ export default function SlideshowOrder() {
       <img 
         src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-logo.png?raw=true" 
         alt="chYOUz logo" 
-        className="absolute top-0 right-0 m-40 w-[288px] h-[88px] hidden md:block"
+        className="absolute top-0 right-0 left-48 m-4 w-[288px] h-[88px] hidden md:block"
       />
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-lg shadow-md max-w-2xl w-full">
         <h2 className="text-2xl mb-6 font-semibold text-left">Order Your Slideshow.<br />Personalized songs for<br />your moments and memories.</h2>
