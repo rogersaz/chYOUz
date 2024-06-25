@@ -11,19 +11,19 @@ export default function Index() {
             <div className="absolute inset-0">
               <img
                 className="h-full w-full object-cover"
-                src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-heder3.jpg?raw=true"
-                alt="BTS playing on stage with the group leaving in action poses"
+                src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-Background-notes.jpeg?raw=true"
+                alt="chYOUz custom music for your custom slideshows"
               />
               <div className="absolute inset-0 bg-[color:rgba(139,92,246,0.5)] mix-blend-multiply" />
             </div>
             <div className="lg:pb-18 relative px-4 pt-16 pb-8 sm:px-6 sm:pt-24 sm:pb-14 lg:px-8 lg:pt-32">
               <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl">
                 <span className="block uppercase text-violet-500 drop-shadow-md">
-                  
+                  chYOUz
                 </span>
               </h1>
               <p className="mx-auto mt-6 max-w-lg text-center text-xl text-white sm:max-w-3xl">
-                
+              Personalized songs for your moments and memories.
               </p>
               <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
                 {user ? (
