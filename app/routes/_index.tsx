@@ -11,7 +11,7 @@ export default function Index() {
             <div className="absolute inset-0 flex justify-center">
               <img
                 className="h-full w-full object-cover max-w-[770px]"
-                src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-Background-notes.jpeg?raw=true"
+                src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-Background-Song-Notes.jpg?raw=true"
                 alt="chYOUz custom music for your custom slideshows"
               />
               <div className="absolute inset-0 bg-[color:rgba(139,92,246,0.5)] mix-blend-multiply" />
