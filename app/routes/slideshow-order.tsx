@@ -77,7 +77,7 @@ export default function SlideshowOrder() {
         className="absolute top-0 right-0 m-4 w-[288px] h-[88px] hidden md:block"
       />
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-lg shadow-md max-w-2xl w-full">
-        <h2 className="text-2xl mb-6 font-semibold text-left">Order Your Slideshow.< /br>Personalized songs for< /br>your moments and memories.</h2>
+        <h2 className="text-2xl mb-6 font-semibold text-left">Order Your Slideshow.<br />Personalized songs for<br />your moments and memories.</h2>
         
         <div className="grid grid-cols-2 gap-6">
           <div className="col-span-2 md:col-span-1">
@@ -151,7 +151,7 @@ export default function SlideshowOrder() {
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2">Upload Photos - You can upload multiple files (max 45MB)</label>
+          <label className="block mb-2">Upload Photos - MAX 45MB - You can upload multiple files</label>
           <input 
             type="file" 
             multiple 
