@@ -1,3 +1,4 @@
+// slideshow-order.tsx
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useForm } from "react-hook-form";
@@ -70,17 +71,17 @@ export default function SlideshowOrder() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <form onSubmit={handleSubmit(onSubmit)} className="relative bg-white p-8 rounded-lg shadow-md max-w-2xl w-full">
-        <img 
-          src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-logo.png?raw=true" 
-          alt="Top Right Photo" 
-          className="absolute top-0 right-0 m-4 w-288 h-88"
-        />
-        <h2 className="text-2xl mb-6 font-semibold text-left">Order Your Slideshow<br />Personalized songs for<br />your moments and memories.</h2>
+      <img 
+        src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-logo.png?raw=true" 
+        alt="chYOUz logo" 
+        className="absolute top-0 right-0 m-4 w-[288px] h-[88px] hidden md:block"
+      />
+      <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-lg shadow-md max-w-2xl w-full">
+        <h2 className="text-2xl mb-6 font-semibold text-left">Order Your Slideshow.< /br>Personalized songs for< /br>your moments and memories.</h2>
         
         <div className="grid grid-cols-2 gap-6">
           <div className="col-span-2 md:col-span-1">
-            <label className="block mb-2 font-bold">Name</label>
+            <label className="block mb-2">Name</label>
             <input 
               type="text" 
               {...register("name", { required: true })} 
@@ -89,7 +90,7 @@ export default function SlideshowOrder() {
             />
           </div>
           <div className="col-span-2 md:col-span-1">
-            <label className="block mb-2 font-bold">Email</label>
+            <label className="block mb-2">Email</label>
             <input 
               type="email" 
               {...register("email", { required: true })} 
@@ -100,7 +101,7 @@ export default function SlideshowOrder() {
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2 font-bold">Keywords for Song</label>
+          <label className="block mb-2">Keywords or Phrases for Song</label>
           <input 
             type="text" 
             {...register("keywords", { required: true })} 
@@ -110,7 +111,7 @@ export default function SlideshowOrder() {
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2 font-bold">Song Genre - You can select multiple options.</label>
+          <label className="block mb-2">Song Genre</label>
           <select 
             multiple 
             {...register("genre", { required: true })} 
@@ -137,7 +138,7 @@ export default function SlideshowOrder() {
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2 font-bold">Singer's Voice</label>
+          <label className="block mb-2">Singer's Voice</label>
           <select 
             {...register("voice", { required: true, validate: value => value !== "select" })} 
             className="w-full px-3 py-2 border rounded-md"
@@ -150,7 +151,7 @@ export default function SlideshowOrder() {
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2 font-bold">Upload Photos (max 40MB)</label>
+          <label className="block mb-2">Upload Photos - You can upload multiple files (max 45MB)</label>
           <input 
             type="file" 
             multiple 
@@ -162,7 +163,7 @@ export default function SlideshowOrder() {
 
         {isUploading && (
           <div className="mt-4">
-            <label className="block mb-2 font-bold">Uploading Photos</label>
+            <label className="block mb-2">Uploading Photos - Please remain on this page until completed</label>
             <div className="w-full bg-gray-200 rounded-full h-4">
               <div
                 className="bg-blue-500 h-4 rounded-full"
