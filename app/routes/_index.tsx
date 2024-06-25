@@ -18,7 +18,7 @@ export default function Index() {
             </div>
             <div className="lg:pb-18 relative px-4 pt-16 pb-8 sm:px-6 sm:pt-24 sm:pb-14 lg:px-8 lg:pt-32">
               <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl">
-                <span className="block uppercase text-orange-500 drop-shadow-md">
+                <span className="block uppercase text-orange-500 drop-shadow-md font-savoye">
                   chYOUz
                 </span>
               </h1>
@@ -35,18 +35,18 @@ export default function Index() {
                   </Link>
                 ) : (
                   <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
-                    <Link
-                      to="/join"
+                    <a
+                      href="https://main--reliable-tapioca-f669c0.netlify.app/slideshow-order"
                       className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-violet-700 shadow-sm hover:bg-violet-50 sm:px-8"
                     >
                       Order
-                    </Link>
-                    <Link
-                      to="/slideshow-order"
+                    </a>
+                    <a
+                      href="https://main--reliable-tapioca-f669c0.netlify.app/slideshow-order"
                       className="flex items-center justify-center rounded-md bg-violet-500 px-4 py-3 font-medium text-white hover:bg-violet-600"
                     >
                       Contact
-                    </Link>
+                    </a>
                   </div>
                 )}
               </div>
