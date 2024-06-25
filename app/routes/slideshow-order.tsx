@@ -71,13 +71,17 @@ export default function SlideshowOrder() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <img 
-        src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-logo.png?raw=true" 
-        alt="chYOUz logo" 
-        className="absolute top-4 right-60 left-40 m-4 w-[288px] h-[88px] hidden md:block"
-      />
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-lg shadow-md max-w-2xl w-full">
-        <h2 className="text-2xl mb-6 font-semibold text-left">Order Your Slideshow.<br />Personalized songs for<br />your moments and memories.</h2>
+        <div className="flex items-center mb-6">
+          <img 
+            src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-logo.png?raw=true" 
+            alt="chYOUz logo" 
+            className="w-24 h-24 mr-4"
+          />
+          <h2 className="text-2xl font-semibold text-left">
+            Order Your Slideshow.<br />Personalized songs for<br />your moments and memories.
+          </h2>
+        </div>
         
         <div className="grid grid-cols-2 gap-6">
           <div className="col-span-2 md:col-span-1">
@@ -186,3 +190,4 @@ export default function SlideshowOrder() {
     </div>
   );
 }
+
