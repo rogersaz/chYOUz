@@ -10,7 +10,7 @@ export default function Index() {
           <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
             <div className="absolute inset-0 flex justify-center">
               <img
-                className="h-full w-full object-cover max-w-[770px]"
+                className="h-full w-full object-cover"
                 src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-Background-Song-Notes.jpg?raw=true"
                 alt="chYOUz custom music for your custom slideshows"
               />
