@@ -10,16 +10,16 @@ export default function Index() {
           <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
             <div className="absolute inset-0 flex justify-center">
               <img
-                className="h-full w-full object-cover max-w-[1100px]"
-                src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-Background-notes.jpg?raw=true"
+                className="h-full w-full object-cover max-w-[770px]"
+                src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-Background-Song-Notes.jpg?raw=true"
                 alt="chYOUz custom music for your custom slideshows"
               />
               <div className="absolute inset-0 bg-[color:rgba(139,92,246,0.5)] mix-blend-multiply" />
             </div>
             <div className="lg:pb-18 relative px-12 pt-16 pb-8 sm:px-12 sm:pt-24 sm:pb-14 lg:px-16 lg:pt-32">
               <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl font-montserrat">
-                <span className="block uppercase text-orange-500 drop-shadow-md">
-                    chYOUz 
+                <span className="block text-orange-500 drop-shadow-md">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; chYOUz &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </span>
               </h1>
               <p className="mx-auto mt-6 max-w-lg text-center text-xl text-white sm:max-w-3xl font-montserrat">
