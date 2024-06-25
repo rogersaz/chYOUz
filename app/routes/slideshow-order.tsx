@@ -78,7 +78,7 @@ export default function SlideshowOrder() {
             className="w-32 h-20 mb-4"
           />
           <h2 className="text-2xl font-semibold text-center">
-            Order Your Slideshow.<br />Personalized songs for your<br />moments and memories.
+            Order Your Slideshow.<br />Personalized songs for your moments & memories.
           </h2>
         </div>
         
