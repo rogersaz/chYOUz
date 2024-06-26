@@ -1,10 +1,10 @@
 // remix.config.js
 
-const { config } = require("@netlify/remix-adapter");
+import { config as netlifyConfig } from "@netlify/remix-adapter";
 
 /** @type {import('@remix-run/dev').AppConfig} */
-module.exports = {
-  ...(process.env.NODE_ENV === "production" ? config : undefined),
+export default {
+  ...(process.env.NODE_ENV === "production" ? netlifyConfig : undefined),
   webpack: (config) => {
     config.module.rules.push({
       test: /\.html$/,
