@@ -9,15 +9,15 @@ export default function Index() {
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
             <div className="absolute inset-0 flex justify-center">
-            <img
-                className="h-full w-full object-cover"
+              <img
+                className="h-full w-full object-cover max-w-[770px]"
                 src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-Background-Song-Notes.jpg?raw=true"
                 alt="chYOUz custom music for your custom slideshows"
               />
               <div className="absolute inset-0 bg-[color:rgba(139,92,246,0.5)] mix-blend-multiply" />
             </div>
             <div className="lg:pb-18 relative px-12 pt-16 pb-8 sm:px-12 sm:pt-24 sm:pb-14 lg:px-16 lg:pt-32">
-              <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl font-montserrat">
+              <h1 className="text-center text-6xl font-extrabold sm:text-8xl lg:text-9xl font-montserrat tracking-tight sm:tracking-normal">
                 <span className="text-orange-500 drop-shadow-md">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ch<span className="text-7xl sm:text-9xl lg:text-10xl">YOU</span>z &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </span>
@@ -49,7 +49,7 @@ export default function Index() {
                     </a>
                     <a
                       href="/EXAMPLES"
-                      className="flex items-center justify-center rounded-md bg-purple-500 px-4 py-3 font-medium text-white hover:bg-green-600 font-montserrat"
+                      className="flex items-center justify-center rounded-md bg-green-500 px-4 py-3 font-medium text-white hover:bg-green-600 font-montserrat"
                     >
                       EXAMPLES
                     </a>
@@ -61,7 +61,7 @@ export default function Index() {
                     </a>
                     <a
                       href="https://main--reliable-tapioca-f669c0.netlify.app/slideshow-order"
-                      className="flex items-center justify-center rounded-md bg-orange-500 px-4 py-3 font-medium text-white hover:bg-peach-600 font-montserrat"
+                      className="flex items-center justify-center rounded-md bg-orange-500 px-4 py-3 font-medium text-white hover:bg-orange-600 font-montserrat"
                     >
                       Contact
                     </a>
@@ -76,5 +76,3 @@ export default function Index() {
     </main>
   );
 }
-
-
