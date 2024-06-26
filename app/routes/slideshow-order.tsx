@@ -68,6 +68,18 @@ export default function SlideshowOrder() {
     setPhotos([...event.target.files]);
   };
 
+  const handleStripePayment = async () => {
+    const response = await fetch('/.netlify/functions/create-checkout-session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const session = await response.json();
+    const stripe = Stripe('YOUR_STRIPE_PUBLISHABLE_KEY');
+    stripe.redirectToCheckout({ sessionId: session.id });
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-lg shadow-md max-w-2xl w-full">
@@ -156,42 +168,4 @@ export default function SlideshowOrder() {
         <div className="mt-4">
           <label className="block mb-2">Upload Photos - MAX 45MB - You can upload multiple files</label>
           <input 
-            type="file" 
-            multiple 
-            onChange={handlePhotoUpload} 
-            className="w-full px-3 py-2 border rounded-md"
-            accept="image/*"
-          />
-        </div>
-
-        {isUploading && (
-          <div className="mt-4">
-            <label className="block mb-2">Uploading Photos - Please remain on this page until completed</label>
-            <div className="w-full bg-gray-200 rounded-full h-4">
-              <div
-                className="bg-blue-500 h-4 rounded-full"
-                style={{ width: `${uploadProgress}%` }}
-              ></div>
-            </div>
-          </div>
-        )}
-
-        <div className="mt-6 text-center space-x-4">
-          <button 
-            type="submit" 
-            className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
-            disabled={isUploading}
-          >
-            Submit Order
-          </button>
-          <a 
-            href="https://main--reliable-tapioca-f669c0.netlify.app/" 
-            className="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 transition-colors duration-300"
-          >
-            Home
-          </a>
-        </div>
-      </form>
-    </div>
-  );
-}
+            type="file"
