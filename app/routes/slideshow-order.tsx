@@ -73,7 +73,7 @@ export default function SlideshowOrder() {
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-lg shadow-md max-w-2xl w-full">
         <div className="flex flex-col items-center mb-4">
           <img 
-            src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-logo-white.png?raw=true" 
+            src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-LOGO-COMPANY.png?raw=true" 
             alt="chYOUz logo" 
             className="w-48 h-28 mb-4"
           />
