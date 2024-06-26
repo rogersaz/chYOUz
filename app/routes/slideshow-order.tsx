@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useForm } from "react-hook-form";
 import 'tailwindcss/tailwind.css';
@@ -12,6 +12,18 @@ export default function SlideshowOrder() {
   const [photos, setPhotos] = useState<File[]>([]);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [stripe, setStripe] = useState<any>(null);
+
+  useEffect(() => {
+    if (window.Stripe) {
+      setStripe(window.Stripe('YOUR_STRIPE_PUBLISHABLE_KEY'));
+    } else {
+      const stripeScript = document.querySelector('#stripe-js');
+      stripeScript.addEventListener('load', () => {
+        setStripe(window.Stripe('YOUR_STRIPE_PUBLISHABLE_KEY'));
+      });
+    }
+  }, []);
 
   const onSubmit = async (data) => {
     console.log('Submitting data:', data);
@@ -76,7 +88,6 @@ export default function SlideshowOrder() {
       },
     });
     const session = await response.json();
-    const stripe = Stripe('YOUR_STRIPE_PUBLISHABLE_KEY');
     stripe.redirectToCheckout({ sessionId: session.id });
   };
 
@@ -211,6 +222,4 @@ export default function SlideshowOrder() {
           </button>
         </div>
       </form>
-    </div>
-  );
-}
+    </div
