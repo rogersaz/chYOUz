@@ -168,4 +168,49 @@ export default function SlideshowOrder() {
         <div className="mt-4">
           <label className="block mb-2">Upload Photos - MAX 45MB - You can upload multiple files</label>
           <input 
-            type="file"
+            type="file" 
+            multiple 
+            onChange={handlePhotoUpload} 
+            className="w-full px-3 py-2 border rounded-md"
+            accept="image/*"
+          />
+        </div>
+
+        {isUploading && (
+          <div className="mt-4">
+            <label className="block mb-2">Uploading Photos - Please remain on this page until completed</label>
+            <div className="w-full bg-gray-200 rounded-full h-4">
+              <div
+                className="bg-blue-500 h-4 rounded-full"
+                style={{ width: `${uploadProgress}%` }}
+              ></div>
+            </div>
+          </div>
+        )}
+
+        <div className="mt-6 text-center space-x-4">
+          <button 
+            type="submit" 
+            className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
+            disabled={isUploading}
+          >
+            Submit Order
+          </button>
+          <a 
+            href="https://main--reliable-tapioca-f669c0.netlify.app/" 
+            className="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 transition-colors duration-300"
+          >
+            Home
+          </a>
+          <button 
+            type="button" 
+            className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition-colors duration-300"
+            onClick={handleStripePayment}
+          >
+            Pay with Stripe
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
