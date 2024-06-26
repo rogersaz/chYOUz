@@ -1,4 +1,4 @@
-// remix.config.js
+// remix.config
 
 import { config as netlifyConfig } from "@netlify/remix-adapter";
 
