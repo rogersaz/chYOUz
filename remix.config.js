@@ -8,3 +8,14 @@ export default {
   //
   // See https://remix.run/file-conventions/remix-config
 };
+// remix.config.js
+
+module.exports = {
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.html$/,
+      use: 'raw-loader', // You can use any appropriate loader for HTML files here
+    });
+    return config;
+  },
+};
