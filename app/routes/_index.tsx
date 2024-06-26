@@ -35,36 +35,36 @@ export default function Index() {
                   </Link>
                 ) : (
                   <div className="space-y-4 sm:space-y-0 sm:inline-grid sm:grid-cols-5 sm:gap-5">
-                    <a
-                      href="https://main--reliable-tapioca-f669c0.netlify.app/slideshow-order"
+                    <Link
+                      to="/slideshow-order"
                       className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-violet-700 shadow-sm hover:bg-violet-50 sm:px-8 font-montserrat"
                     >
                       Order
-                    </a>
-                    <a
-                      href="/ABOUT"
+                    </Link>
+                    <Link
+                      to="/about"
                       className="flex items-center justify-center rounded-md bg-blue-500 px-4 py-3 font-medium text-white hover:bg-blue-600 font-montserrat"
                     >
                       ABOUT
-                    </a>
-                    <a
-                      href="/EXAMPLES"
+                    </Link>
+                    <Link
+                      to="/examples"
                       className="flex items-center justify-center rounded-md bg-green-500 px-4 py-3 font-medium text-white hover:bg-green-600 font-montserrat"
                     >
                       EXAMPLES
-                    </a>
-                    <a
-                      href="/PRICING"
+                    </Link>
+                    <Link
+                      to="/pricing"
                       className="flex items-center justify-center rounded-md bg-red-500 px-4 py-3 font-medium text-white hover:bg-red-600 font-montserrat"
                     >
                       PRICING
-                    </a>
-                    <a
-                      href="https://main--reliable-tapioca-f669c0.netlify.app/slideshow-order"
+                    </Link>
+                    <Link
+                      to="/contact"
                       className="flex items-center justify-center rounded-md bg-orange-500 px-4 py-3 font-medium text-white hover:bg-orange-600 font-montserrat"
                     >
                       Contact
-                    </a>
+                    </Link>
                   </div>
                 )}
               </div>
