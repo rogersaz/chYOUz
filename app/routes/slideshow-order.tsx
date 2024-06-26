@@ -18,10 +18,10 @@ export default function SlideshowOrder() {
     if (window.Stripe) {
       setStripe(window.Stripe('YOUR_STRIPE_PUBLISHABLE_KEY'));
     } else {
-      const stripeScript = document.querySelector('#stripe-js');
-      stripeScript.addEventListener('load', () => {
-        setStripe(window.Stripe('YOUR_STRIPE_PUBLISHABLE_KEY'));
-      });
+      const script = document.createElement('script');
+      script.src = 'https://js.stripe.com/v3/';
+      script.onload = () => setStripe(window.Stripe('YOUR_STRIPE_PUBLISHABLE_KEY'));
+      document.body.appendChild(script);
     }
   }, []);
 
@@ -222,4 +222,7 @@ export default function SlideshowOrder() {
           </button>
         </div>
       </form>
-    </div
+    </div>
+  );
+}
+
