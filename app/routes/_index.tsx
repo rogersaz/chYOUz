@@ -61,7 +61,7 @@ export default function Index() {
                     </a>
                     <a
                       href="https://main--reliable-tapioca-f669c0.netlify.app/slideshow-order"
-                      className="flex items-center justify-center rounded-md bg-violet-500 px-4 py-3 font-medium text-white hover:bg-violet-600 font-montserrat"
+                      className="flex items-center justify-center rounded-md bg-magenta-500 px-4 py-3 font-medium text-white hover:bg-violet-600 font-montserrat"
                     >
                       Contact
                     </a>
