@@ -22,7 +22,7 @@ export default function Index() {
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ch<span className="text-7xl sm:text-9xl lg:text-10xl">YOU</span>z &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </span>
               </h1>
-              <p className="mx-auto mt-2 max-w-lg text-center text-xl text-white sm:max-w-3xl font-montserrat">
+              <p className="mx-auto mt-0 max-w-lg text-center text-xl text-white sm:max-w-3xl font-montserrat">
                 Personalized songs for your moments and memories.
               </p>
               <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center sm:space-x-4">
