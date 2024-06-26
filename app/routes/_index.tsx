@@ -9,7 +9,7 @@ export default function Index() {
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
             <div className="absolute inset-0 flex justify-center">
-              <img
+            <img
                 className="h-full w-full object-cover"
                 src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-Background-Song-Notes.jpg?raw=true"
                 alt="chYOUz custom music for your custom slideshows"
@@ -25,7 +25,7 @@ export default function Index() {
               <p className="mx-auto mt-6 max-w-lg text-center text-xl text-white sm:max-w-3xl font-montserrat">
                 Personalized songs for your moments and memories.
               </p>
-              <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
+              <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center sm:space-x-4">
                 {user ? (
                   <Link
                     to="/notes"
@@ -34,12 +34,30 @@ export default function Index() {
                     View Notes for {user.email}
                   </Link>
                 ) : (
-                  <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
+                  <div className="space-y-4 sm:space-y-0 sm:inline-grid sm:grid-cols-5 sm:gap-5">
                     <a
                       href="https://main--reliable-tapioca-f669c0.netlify.app/slideshow-order"
                       className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-violet-700 shadow-sm hover:bg-violet-50 sm:px-8 font-montserrat"
                     >
                       Order
+                    </a>
+                    <a
+                      href="/ABOUT"
+                      className="flex items-center justify-center rounded-md bg-blue-500 px-4 py-3 font-medium text-white hover:bg-blue-600 font-montserrat"
+                    >
+                      ABOUT
+                    </a>
+                    <a
+                      href="/EXAMPLES"
+                      className="flex items-center justify-center rounded-md bg-purple-500 px-4 py-3 font-medium text-white hover:bg-green-600 font-montserrat"
+                    >
+                      EXAMPLES
+                    </a>
+                    <a
+                      href="/PRICING"
+                      className="flex items-center justify-center rounded-md bg-red-500 px-4 py-3 font-medium text-white hover:bg-red-600 font-montserrat"
+                    >
+                      PRICING
                     </a>
                     <a
                       href="https://main--reliable-tapioca-f669c0.netlify.app/slideshow-order"
@@ -54,31 +72,9 @@ export default function Index() {
             </div>
           </div>
         </div>
-
-        <div className="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
-          <div className="mt-6 flex flex-wrap justify-center gap-8">
-            <a
-              href="/ABOUT"
-              className="flex items-center justify-center rounded-md bg-blue-500 px-4 py-3 font-medium text-white hover:bg-blue-600 font-montserrat"
-            >
-              ABOUT
-            </a>
-            <a
-              href="/EXAMPLES"
-              className="flex items-center justify-center rounded-md bg-green-500 px-4 py-3 font-medium text-white hover:bg-green-600 font-montserrat"
-            >
-              EXAMPLES
-            </a>
-            <a
-              href="/PRICING"
-              className="flex items-center justify-center rounded-md bg-red-500 px-4 py-3 font-medium text-white hover:bg-red-600 font-montserrat"
-            >
-              PRICING
-            </a>
-          </div>
-        </div>
       </div>
     </main>
   );
 }
+
 
