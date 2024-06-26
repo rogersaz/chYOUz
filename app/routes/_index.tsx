@@ -57,10 +57,28 @@ export default function Index() {
 
         <div className="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
           <div className="mt-6 flex flex-wrap justify-center gap-8">
-            {/* Removed all logos */}
+            <a
+              href="/ABOUT"
+              className="flex items-center justify-center rounded-md bg-blue-500 px-4 py-3 font-medium text-white hover:bg-blue-600 font-montserrat"
+            >
+              ABOUT
+            </a>
+            <a
+              href="/EXAMPLES"
+              className="flex items-center justify-center rounded-md bg-green-500 px-4 py-3 font-medium text-white hover:bg-green-600 font-montserrat"
+            >
+              EXAMPLES
+            </a>
+            <a
+              href="/PRICING"
+              className="flex items-center justify-center rounded-md bg-red-500 px-4 py-3 font-medium text-white hover:bg-red-600 font-montserrat"
+            >
+              PRICING
+            </a>
           </div>
         </div>
       </div>
     </main>
   );
 }
+
