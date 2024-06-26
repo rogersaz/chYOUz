@@ -12,18 +12,6 @@ export default function SlideshowOrder() {
   const [photos, setPhotos] = useState<File[]>([]);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const [isUploading, setIsUploading] = useState<boolean>(false);
-  const [stripe, setStripe] = useState<any>(null);
-
-  useEffect(() => {
-    if (window.Stripe) {
-      setStripe(window.Stripe('YOUR_STRIPE_PUBLISHABLE_KEY'));
-    } else {
-      const script = document.createElement('script');
-      script.src = 'https://js.stripe.com/v3/';
-      script.onload = () => setStripe(window.Stripe('YOUR_STRIPE_PUBLISHABLE_KEY'));
-      document.body.appendChild(script);
-    }
-  }, []);
 
   const onSubmit = async (data) => {
     console.log('Submitting data:', data);
@@ -78,17 +66,6 @@ export default function SlideshowOrder() {
 
   const handlePhotoUpload = (event) => {
     setPhotos([...event.target.files]);
-  };
-
-  const handleStripePayment = async () => {
-    const response = await fetch('/.netlify/functions/create-checkout-session', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    const session = await response.json();
-    stripe.redirectToCheckout({ sessionId: session.id });
   };
 
   return (
@@ -213,13 +190,6 @@ export default function SlideshowOrder() {
           >
             Home
           </a>
-          <button 
-            type="button" 
-            className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition-colors duration-300"
-            onClick={handleStripePayment}
-          >
-            Pay with Stripe
-          </button>
         </div>
       </form>
     </div>
