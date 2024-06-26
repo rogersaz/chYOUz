@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useForm } from "react-hook-form";
 import 'tailwindcss/tailwind.css';
@@ -195,4 +195,3 @@ export default function SlideshowOrder() {
     </div>
   );
 }
-
