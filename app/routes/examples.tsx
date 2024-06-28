@@ -25,7 +25,7 @@ export default function Index() {
                 </span>
               </h1>
               <div className="mt-10 flex flex-col items-center">
-                <Swiper
+                {/* <Swiper
                   spaceBetween={50}
                   slidesPerView={1}
                   onSlideChange={() => console.log('slide change')}
@@ -55,8 +55,8 @@ export default function Index() {
                       ></iframe>
                     </div>
                   </SwiperSlide>
-                  {/* Add more SwiperSlide components as needed */}
-                </Swiper>
+                  {/* Add more SwiperSlide components as needed
+                </Swiper> */}
               </div>
               <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center sm:space-x-4">
                 {user ? (
