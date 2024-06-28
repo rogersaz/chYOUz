@@ -1,5 +1,7 @@
 import { Link } from "@remix-run/react";
 import { useOptionalUser } from "~/utils";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 export default function Index() {
   const user = useOptionalUser();
@@ -21,44 +23,41 @@ export default function Index() {
                 <span className="text-orange-500 drop-shadow-md">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Example<span className="text-7xl sm:text-9xl lg:text-10xl"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </span>
-
-                <div className="mt-10 flex flex-col items-center">
-  {/* <h2 className="text-2xl font-bold text-white mb-4">Sample video and song</h2> */}
-  
-  <div className="relative w-full max-w-xl aspect-video">
-    <iframe
-      className="absolute top-0 left-0 w-full h-full"
-      src="https://www.youtube.com/embed/An_CFJ7x-JE"
-      title="YouTube video player"
-      frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-    ></iframe>
-  </div>
-  
-  <p>&nbsp;</p>
-
-  <div className="relative w-full max-w-xl aspect-video">
-    <iframe
-      className="absolute top-0 left-0 w-full h-full"
-      src="https://www.youtube.com/embed/J3X3gSRlpbY"
-      title="YouTube video player"
-      frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-    ></iframe>
-  </div>
-  
-  {/* <p className="text-white mt-4 max-w-xl text-center">Example Video</p> */}
-
-</div>
-
-
-
               </h1>
-              {/* <p className="mx-auto -mt-4 max-w-lg text-center text-xl text-white sm:max-w-3xl font-montserrat">
-                Examples coming soon.
-              </p> */}
+              <div className="mt-10 flex flex-col items-center">
+                <Swiper
+                  spaceBetween={50}
+                  slidesPerView={1}
+                  onSlideChange={() => console.log('slide change')}
+                  onSwiper={(swiper) => console.log(swiper)}
+                >
+                  <SwiperSlide>
+                    <div className="relative w-full max-w-xl aspect-video">
+                      <iframe
+                        className="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/An_CFJ7x-JE"
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div className="relative w-full max-w-xl aspect-video">
+                      <iframe
+                        className="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/J3X3gSRlpbY"
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  </SwiperSlide>
+                  {/* Add more SwiperSlide components as needed */}
+                </Swiper>
+              </div>
               <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center sm:space-x-4">
                 {user ? (
                   <Link
