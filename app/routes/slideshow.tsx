@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+// slideshow-order.tsx
+import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useForm } from "react-hook-form";
 import 'tailwindcss/tailwind.css';
@@ -71,16 +72,7 @@ export default function SlideshowOrder() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-8 rounded-lg shadow-md max-w-2xl w-full">
-        <div className="flex flex-col items-center mb-4">
-          <img 
-            src="https://github.com/rogersaz/chYOUz/blob/main/public/chYOUz-LOGO-COMPANY.png?raw=true" 
-            alt="chYOUz logo" 
-            className="w-48 h-28 mb-4"
-          />
-          <h2 className="text-2xl font-semibold text-center">
-            Order Your Slideshow.<br />Personalized songs for your moments & memories.
-          </h2>
-        </div>
+        <h2 className="text-2xl mb-6 font-semibold text-center">Order Your Slideshow</h2>
         
         <div className="grid grid-cols-2 gap-6">
           <div className="col-span-2 md:col-span-1">
@@ -104,7 +96,7 @@ export default function SlideshowOrder() {
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2">Keywords or Phrases for Song</label>
+          <label className="block mb-2">Keywords for Song</label>
           <input 
             type="text" 
             {...register("keywords", { required: true })} 
@@ -114,7 +106,7 @@ export default function SlideshowOrder() {
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2">Song Genre - Multiple choice are fine</label>
+          <label className="block mb-2">Song Genre</label>
           <select 
             multiple 
             {...register("genre", { required: true })} 
@@ -141,7 +133,7 @@ export default function SlideshowOrder() {
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2">Singer's Voice</label>
+          <label className="block mb-2">Singer Voice</label>
           <select 
             {...register("voice", { required: true, validate: value => value !== "select" })} 
             className="w-full px-3 py-2 border rounded-md"
@@ -154,7 +146,7 @@ export default function SlideshowOrder() {
         </div>
 
         <div className="mt-4">
-          <label className="block mb-2">Upload Photos - MAX 45MB - You can upload multiple files</label>
+          <label className="block mb-2">Upload Photos (max 25MB)</label>
           <input 
             type="file" 
             multiple 
@@ -166,7 +158,7 @@ export default function SlideshowOrder() {
 
         {isUploading && (
           <div className="mt-4">
-            <label className="block mb-2">Uploading Photos - Please remain on this page until completed</label>
+            <label className="block mb-2">Uploading Photos</label>
             <div className="w-full bg-gray-200 rounded-full h-4">
               <div
                 className="bg-blue-500 h-4 rounded-full"
@@ -176,7 +168,7 @@ export default function SlideshowOrder() {
           </div>
         )}
 
-        <div className="mt-6 text-center space-x-4">
+        <div className="mt-6 text-center">
           <button 
             type="submit" 
             className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300"
@@ -184,15 +176,8 @@ export default function SlideshowOrder() {
           >
             Submit Order
           </button>
-          <a 
-            href="https://main--reliable-tapioca-f669c0.netlify.app/" 
-            className="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 transition-colors duration-300"
-          >
-            Home
-          </a>
         </div>
       </form>
     </div>
   );
 }
-

@@ -1,10 +1,23 @@
-import { config } from "@netlify/remix-adapter";
+// remix.config.js
+import { config as netlifyConfig } from "@netlify/remix-adapter";
 
 /** @type {import('@remix-run/dev').AppConfig} */
-export default {
-  ...(process.env.NODE_ENV === "production" ? config : undefined),
-  // This works out of the box with the Netlify adapter, but you can
-  // add your own custom config here if you want to.
-  //
-  // See https://remix.run/file-conventions/remix-config
+const remixConfig = {
+  ...(process.env.NODE_ENV === "production" ? netlifyConfig : undefined),
+  future: {
+    v2_meta: true, // Enable future Remix features if needed
+  },
+  webpack: (config) => {
+    // Add a loader for .html files
+    config.module.rules.push({
+      test: /\.html$/,
+      type: "asset/source", // Use the appropriate type for handling HTML files
+    });
+    return config;
+  },
 };
+
+export default remixConfig;
+
+
+
