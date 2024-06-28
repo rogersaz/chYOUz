@@ -37,7 +37,7 @@ export default function Index() {
                         className="absolute top-0 left-0 w-full h-full"
                         src="https://www.youtube.com/embed/An_CFJ7x-JE"
                         title="YouTube video player"
-                        frameBorder="0"
+                        
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                       ></iframe>
@@ -49,7 +49,7 @@ export default function Index() {
                         className="absolute top-0 left-0 w-full h-full"
                         src="https://www.youtube.com/embed/J3X3gSRlpbY"
                         title="YouTube video player"
-                        frameBorder="0"
+                    
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                       ></iframe>
